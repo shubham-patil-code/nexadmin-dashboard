@@ -148,7 +148,7 @@ const Dashboard = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <h1 className="text-base font-bold text-gray-900">Hospital Admin Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Hospital Admin Dashboard</h1>
           <p className="text-gray-500 mt-1">Clean, modern overview of hospital operations and core modules.</p>
           <p className="text-sm mt-2 inline-flex bg-blue-50 text-blue-700 px-2 py-1 rounded-md border border-blue-100">
             Logged in as {user?.role || "user"} ({user?.name || "Unknown"})
