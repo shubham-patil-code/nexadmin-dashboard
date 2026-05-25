@@ -1,0 +1,497 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NexaCare Sidebar — Premium Medical Admin Navigation
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Root Shell ─────────────────────────────────────────────────── */
+.sidebar-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Premium dark gradient background */
+  background: linear-gradient(180deg, #0a1e38 0%, #0d2847 40%, #0f1f35 100%);
+  color: #c8d6e5;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-root--expanded {
+  width: 16.5rem;
+}
+
+.sidebar-root--collapsed {
+  width: 5rem;
+}
+
+.sidebar-root--open {
+  transform: translateX(0);
+}
+
+.sidebar-root--closed {
+  transform: translateX(-100%);
+}
+
+@media (min-width: 768px) {
+  .sidebar-root--closed {
+    transform: translateX(0);
+  }
+}
+
+/* Custom scrollbar */
+.sidebar-root::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-root::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+}
+
+
+/* ── Header / Logo ──────────────────────────────────────────────── */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: sticky;
+  top: 0;
+  background: inherit;
+  z-index: 10;
+}
+
+.sidebar-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.sidebar-header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  box-shadow:
+    0 2px 8px rgba(59, 130, 246, 0.35),
+    0 0 0 1px rgba(59, 130, 246, 0.15);
+}
+
+.sidebar-header__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sidebar-header__title {
+  @apply text-base font-bold;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.sidebar-header__subtitle {
+  @apply text-xs font-semibold;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.sidebar-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.sidebar-header__toggle,
+.sidebar-header__close {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: rgba(148, 163, 184, 0.7);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar-header__toggle:hover,
+.sidebar-header__close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+
+/* ── Section Labels ─────────────────────────────────────────────── */
+.sidebar-section-label {
+  padding: 1.25rem 1.5rem 0.5rem;
+  @apply text-xs font-semibold;
+  letter-spacing: 0.1em;
+  color: rgba(148, 163, 184, 0.45);
+  text-transform: uppercase;
+}
+
+
+/* ── Navigation ─────────────────────────────────────────────────── */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.25rem 0.75rem 0.5rem;
+}
+
+.sidebar-nav--core {
+  flex: 0 0 auto;
+}
+
+.sidebar-nav--ai {
+  flex: 1;
+  padding-bottom: 0.25rem;
+}
+
+.sidebar-nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.625rem;
+  @apply text-sm font-medium;
+  color: rgba(203, 213, 225, 0.8);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar-nav__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-nav__item--active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.15));
+  color: #fff;
+  font-weight: 600;
+  border-color: rgba(59, 130, 246, 0.25);
+  box-shadow:
+    0 1px 6px rgba(59, 130, 246, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-nav__item--active::before {
+  content: '';
+  position: absolute;
+  left: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: linear-gradient(180deg, #3b82f6, #60a5fa);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+/* Child items (nested under sections) */
+.sidebar-nav__item--child {
+  padding: 0.45rem 0.75rem 0.45rem 1rem;
+  @apply text-xs;
+}
+
+.sidebar-nav__item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.sidebar-nav__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  color: rgba(148, 163, 184, 0.65);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.2s;
+}
+
+.sidebar-nav__icon--sm {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.375rem;
+}
+
+.sidebar-nav__item:hover .sidebar-nav__icon {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-nav__icon--active {
+  color: #60a5fa !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+
+.sidebar-nav__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav__icon--logout {
+  color: rgba(248, 113, 113, 0.7) !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+}
+
+.sidebar-nav__item--logout:hover .sidebar-nav__icon--logout {
+  color: #fca5a5 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   COLLAPSIBLE SECTIONS
+   ═══════════════════════════════════════════════════════════════════ */
+
+.sidebar-section {
+  margin-bottom: 2px;
+}
+
+.sidebar-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.625rem;
+  @apply text-sm font-medium;
+  color: rgba(203, 213, 225, 0.8);
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.sidebar-section__header:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-section__header--active {
+  color: #e2e8f0;
+}
+
+.sidebar-section__header--active .sidebar-nav__icon {
+  color: #a78bfa !important;
+  background: rgba(139, 92, 246, 0.15) !important;
+}
+
+/* Chevron */
+.sidebar-section__chevron {
+  color: rgba(148, 163, 184, 0.4);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+  flex-shrink: 0;
+}
+
+.sidebar-section__chevron--open {
+  transform: rotate(180deg);
+  color: rgba(148, 163, 184, 0.7);
+}
+
+/* Collapsible content */
+.sidebar-section__items {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease;
+  opacity: 0;
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+  margin-left: 1.75rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.sidebar-section__items--open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+
+/* ── Badge Pill ─────────────────────────────────────────────────── */
+.sidebar-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.4rem;
+  border-radius: 99px;
+  @apply text-xs font-bold;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow:
+    0 1px 4px rgba(239, 68, 68, 0.4),
+    0 0 0 2px rgba(239, 68, 68, 0.12);
+  flex-shrink: 0;
+  animation: badge-pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.sidebar-badge--collapsed {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  min-width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  font-size: 0;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px #0d2847,
+    0 1px 4px rgba(239, 68, 68, 0.5);
+}
+
+/* Soft pulsing glow */
+.sidebar-badge__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: badge-pulse 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+
+/* ── Divider ────────────────────────────────────────────────────── */
+.sidebar-divider {
+  margin: 0.5rem 1rem;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 100%);
+}
+
+.sidebar-footer-actions {
+  padding: 0 0.75rem 0.25rem;
+}
+
+
+/* ── Help Card ──────────────────────────────────────────────────── */
+.sidebar-help {
+  padding: 0.75rem 0.75rem 1rem;
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  background: inherit;
+}
+
+.sidebar-help__card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.sidebar-help__card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-help__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  flex-shrink: 0;
+}
+
+.sidebar-help__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-help__title {
+  @apply text-xs font-semibold;
+  color: #e2e8f0;
+}
+
+.sidebar-help__subtitle {
+  @apply text-xs font-normal;
+  color: rgba(148, 163, 184, 0.6);
+  margin-top: 1px;
+}
+
+
+/* ── Keyframe Animations ────────────────────────────────────────── */
+@keyframes badge-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  60% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes badge-pulse {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: scale(1.6);
+  }
+}
